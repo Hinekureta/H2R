@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% for post in posts %}
+        <p>{{ post.date | date('d-m-Y') }}</p>
+        <p>{{ post.title }}</p>
+        <p>{{ post.content | raw}}</p>
+        <br/>
+    {% endfor %}
+{% endblock %}
