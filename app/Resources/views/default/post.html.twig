@@ -1,0 +1,6 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {{ post.date | date('d-m-Y') }}
+    <h2>{{ post.title }}</h2>
+    {{ post.content |raw }}
+{% endblock %}

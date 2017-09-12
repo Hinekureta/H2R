@@ -2,13 +2,13 @@
 
 {% block body %}
     {% for post in posts %}
-        <a>
-            <p>
+        <p>
+            <a href="{{ url('post_detail', {'id' : post.id}) }}">
                 {{ post.date | date('d-m-Y') }}
-            <h3>{{ post.title }}</h3>
-            {{ post.content |raw }}
-            </p>
-        </a>
-        <br/>
+                <h3>{{ post.title }}</h3>
+                {{ post.content |raw }}
+            </a>
+        </p>
+        <br>
     {% endfor %}
 {% endblock %}
