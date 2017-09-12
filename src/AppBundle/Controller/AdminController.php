@@ -11,6 +11,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Post;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -21,7 +22,8 @@ class AdminController extends Controller
 {
 
     /**
-     * @Route("/admin/posts/new", name="admin-new-post")
+     * @Route("/posts/new", name="admin-new-post")
+     * @Security("has_role('ROLE_ADMIN')")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -43,7 +45,7 @@ class AdminController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($post);
             $em->flush();
-            return $this->redirectToRoute('admin-index');
+            return $this->redirectToRoute('homepage');
         }
 
         return $this->render(':admin:new-post.html.twig', [
