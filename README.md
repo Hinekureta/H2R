@@ -1,7 +1,5 @@
-# Basic Symfony App
+# H2R
 
-Provides a simple symfony app.
+Simple blog using Symfony 3 framework.
 
-Login & Registration are handled
-
-Roles are handled.
+Training !
