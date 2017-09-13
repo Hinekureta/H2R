@@ -5,6 +5,8 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
     </head>
     <body>
         {% block navbar %}
@@ -22,6 +24,9 @@
 
         {% block body %}
         {% endblock %}
+        <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+        <script src="{{ asset('js/jquery-3.2.1.js') }}"></script>
+        <script src="{{ asset('js/bootstrap/bootstrap.min.js') }}"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>
