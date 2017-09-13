@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     <p>
-        <a href="{{ url('delete-post', {'id' : post.id}) }}">Delete</a>
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ url('delete-post', {'id' : post.id}) }}">Delete</a>
+        {% endif %}
         {{ post.date | date('d-m-Y') }}
         <h2>{{ post.title }}</h2>
         {{ post.content |raw }}
