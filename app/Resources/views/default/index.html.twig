@@ -6,14 +6,6 @@
             <span class="post-zone" data-id="{{ post.id }}"
             data-date="{{ post.date | date('d-m-Y') }}" data-title="{{ post.title }}"
             data-content="{{ post.content |raw }}"></span>
-            {#<div>#}
-                {#<a href="{{ url('post_detail', {'id' : post.id}) }}">#}
-                    {#{{ post.date | date('d-m-Y') }}#}
-                    {#<h3>{{ post.title }}</h3>#}
-                    {#{{ post.content |raw }}#}
-                {#</a>#}
-            {#</div>#}
-            {#<br>#}
         {% endfor %}
     </div>
 {% endblock %}
