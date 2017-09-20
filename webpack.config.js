@@ -4,7 +4,7 @@ module.exports = {
     entry: './web/js/react/index.jsx',
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname+ '/web/js/react', 'dist')
+        path: path.resolve(__dirname+ '/web/js', 'build')
     },
     module: {
         loaders: [
