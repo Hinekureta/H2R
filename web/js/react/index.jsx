@@ -10,7 +10,7 @@ class PostsList extends React.Component {
             var post = postZones[i];
             rows.push(
                 <div key={i}>
-                    <a href={window.location.href + "posts/" + post.getAttribute('data-id')}>
+                    <a href={window.location.href + "/posts/" + post.getAttribute('data-id')}>
                         {post.getAttribute('data-date')}
                         <h3>{post.getAttribute('data-title')}</h3>
                         {post.getAttribute('data-content')}
@@ -18,17 +18,6 @@ class PostsList extends React.Component {
                 </div>
             );
         }
-        {/*postZones.forEach(function (post) {*/}
-        //    rows.push(
-        //        <div>
-        //        <a href={window.location.href + "/posts/" + post.getAttribute('data-id')}>
-        //        {post.getAttribute('data-date')}
-        //        <h3>{post.getAttribute('data-title')}</h3>
-        //        {post.getAttribute('data-content')}
-        //        </a>
-        //        </div>
-        //    );
-        // });
         return (
             <div>{rows}</div>
         );
