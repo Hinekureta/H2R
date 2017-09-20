@@ -8,7 +8,7 @@ export default class Post extends React.Component {
                 <a href={window.location.href + "/posts/" + post.getAttribute('data-id')}>
                     {post.getAttribute('data-date')}
                     <h3>{post.getAttribute('data-title')}</h3>
-                    {post.getAttribute('data-content')}
+                    <div dangerouslySetInnerHTML={{__html: post.getAttribute('data-content')}}/>
                 </a>
             </div>
         );
