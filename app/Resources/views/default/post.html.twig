@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <div>
+    <div id="root">
         {% if is_granted('ROLE_ADMIN') %}
             <a href="{{ url('delete-post', {'id' : post.id}) }}">Delete</a>
             <button id="modify-button" type="button">Modifier</button>
@@ -10,11 +10,14 @@
         <div id="content">
             {{ post.content |raw }}
         </div>
-        <div id="editable-content" class="hidden">
-            <input type="text" value="{{ post.content }}">
-            <button type="button" class="btn btn-success">Validate</button>
-            <button type="button" class="btn btn-danger">Cancel</button>
-        </div>
+        {% if is_granted('ROLE_ADMIN') %}
+            <div id="editable-content" class="hidden">
+                <input type="text" value="{{ post.content }}">
+                <button type="button" class="btn btn-success">Validate</button>
+                <button type="button" class="btn btn-danger">Cancel</button>
+            </div>
+        {% endif %}
+
     </div>
 
 {% endblock %}
