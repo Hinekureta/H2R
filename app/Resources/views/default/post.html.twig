@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block body %}
+    <div class="loader-background hidden"></div>
+    <span class="cssload-loader hidden"><span class="cssload-loader-inner"></span></span>
     <div id="root">
         {% if is_granted('ROLE_ADMIN') %}
             <a href="{{ url('delete-post', {'id' : post.id}) }}">Delete</a>
@@ -17,19 +19,22 @@
                 <button type="button" class="btn btn-danger" id="cancel">Cancel</button>
             </div>
         {% endif %}
-
     </div>
 
 {% endblock %}
 {% block javascripts %}
     <script>
         $(document).ready(function () {
-            console.log('READY');
+            function showLoader() {
+                $('.cssload-loader').toggle();
+                $('.loader-background').toggle();
+            }
             $('#modify-button').click(function () {
                 $('#content').toggle();
                 $('#editable-content').toggle();
             });
             $('#validate').click(function () {
+                showLoader();
                 var modifiedContent = $('#modified-content').val();
                 var url = "{{ url('edit-post', {'id':post.id})}}";
                 $.ajax({
@@ -39,6 +44,11 @@
                 }).done(function () {
                     window.location.reload();
                 });
+            });
+            $('#cancel').click(function () {
+                $('#modified-content').val("{{ post.content | raw }}");
+                $('#content').toggle();
+                $('#editable-content').toggle();
             })
         })
     </script>
