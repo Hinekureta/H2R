@@ -12,9 +12,9 @@
         </div>
         {% if is_granted('ROLE_ADMIN') %}
             <div id="editable-content" class="hidden">
-                <input type="text" value="{{ post.content }}">
-                <button type="button" class="btn btn-success">Validate</button>
-                <button type="button" class="btn btn-danger">Cancel</button>
+                <input type="text" value="{{ post.content }}" id="modified-content">
+                <button type="button" class="btn btn-success" id="validate">Validate</button>
+                <button type="button" class="btn btn-danger" id="cancel">Cancel</button>
             </div>
         {% endif %}
 
@@ -25,9 +25,22 @@
     <script>
         $(document).ready(function () {
             console.log('READY');
+            $("#fakeloader").fakeLoader();
             $('#modify-button').click(function () {
                 $('#content').toggle();
                 $('#editable-content').toggle();
+            });
+            $('#validate').click(function () {
+                $('#preloader').fadeOut('slow',function(){$(this).remove();});
+                var modifiedContent = $('#modified-content').val();
+                var url = "{{ url('edit-post', {'id':post.id})}}";
+                $.ajax({
+                    url: url,
+                    method: 'post',
+                    data: {content:modifiedContent}
+                }).done(function () {
+                    window.location.reload();
+                });
             })
         })
     </script>

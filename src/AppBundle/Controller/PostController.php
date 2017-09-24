@@ -13,6 +13,8 @@ use AppBundle\Entity\Post;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 class PostController extends Controller
 {
@@ -57,6 +59,24 @@ class PostController extends Controller
         $em->remove($post);
         $em->flush();
         return $this->redirectToRoute('homepage');
+    }
+
+    /**
+     * @Route("/posts/{id}/edit", name="edit-post")
+     * @Security("has_role('ROLE_ADMIN')")
+     * @param Request $request
+     * @param $id
+     * @return JsonResponse
+     */
+    public function editPostAction(Request $request, $id)
+    {
+        $post = $this->getDoctrine()->getRepository(Post::class)->find($id);
+        $postContent = $request->request->get('content');
+        $post->setContent($postContent);
+
+        $manager = $this->getDoctrine()->getManager();
+        $manager->flush();
+        return new JsonResponse(['post' => $post]);
     }
 
 }
