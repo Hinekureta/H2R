@@ -31,7 +31,6 @@
                 $('#editable-content').toggle();
             });
             $('#validate').click(function () {
-                $('#preloader').fadeOut('slow',function(){$(this).remove();});
                 var modifiedContent = $('#modified-content').val();
                 var url = "{{ url('edit-post', {'id':post.id})}}";
                 $.ajax({
