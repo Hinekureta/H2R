@@ -2,6 +2,14 @@
     display: none;
 }
 
+body {
+    background-color: #465d4c;
+}
+
+.container {
+    background-color: #F9F9F9;
+}
+
 .loader-background {
     width: 100%;
     height: 100%;
