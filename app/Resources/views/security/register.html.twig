@@ -1,12 +1,32 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {{ form_start(form) }}
-        {{ form_row(form.username) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.plainPassword.first) }}
-        {{ form_row(form.plainPassword.second) }}
+    <div class="container container-login mt-3 pl-xl-5 pr-xl-5 pt-4 pb-5 mb-5">
+        {{ form_start(form) }}
+        <div class="row justify-content-center">
+            <i class="fa fa-user-circle-o input-group-addon col-md-1" aria-hidden="true"></i>
+            {{ form_widget(form.username) }}
+        </div>
 
-        <button type="submit">Register</button>
-    {{ form_end(form) }}
+        <div class="row justify-content-center mt-1">
+            <i class="fa fa-envelope input-group-addon col-md-1" aria-hidden="true"></i>
+            {{ form_widget(form.email) }}
+        </div>
+
+        <div class="row justify-content-center mt-1">
+            <i class="fa fa-unlock-alt input-group-addon col-md-1" aria-hidden="true"></i>
+            {{ form_widget(form.plainPassword.first) }}
+        </div>
+
+        <div class="row justify-content-center mt-1">
+            <i class="fa fa-repeat input-group-addon col-md-1" aria-hidden="true"></i>
+            {{ form_widget(form.plainPassword.second) }}
+        </div>
+
+        <div class="row justify-content-center mt-3">
+            <button class="col-md-8 btn btn-login" type="submit">Créer le compte</button>
+        </div>
+        {{ form_end(form) }}
+    </div>
+
 {% endblock %}
