@@ -16,8 +16,13 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12">{{ post.content | raw }}</div>
+                    <div class="col-md-12">{{ post.content | slice(0, 2042) | raw }}</div>
                 </div>
+                {% if post.content | length > 2042 %}
+                    <div class="row mt-2">
+                        <a class="col-md-3" href="{{ url('post_detail', {'id' : post.id}) }}">Lire la suite...</a>
+                    </div>
+                {% endif %}
             </div>
             <hr>
         {% endfor %}
