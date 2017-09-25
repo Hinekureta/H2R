@@ -10,6 +10,11 @@ body {
     background-color: #F9F9F9;
 }
 
+.date-style {
+    font-style: italic;
+    color: #96A996;
+}
+
 .loader-background {
     width: 100%;
     height: 100%;
