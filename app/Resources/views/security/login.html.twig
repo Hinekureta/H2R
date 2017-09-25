@@ -1,24 +1,31 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-{% if error %}
-    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-{% endif %}
-    <form action="{{ path('login') }}" method="post">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}" />
+    <div class="container container-login mt-3 pl-xl-5 pr-xl-5 pt-4 pb-5 mb-5">
+        <form action="{{ path('login') }}" method="post">
+            <div class="row justify-content-center">
+                <i class="fa fa-user-circle-o input-group-addon col-md-1" aria-hidden="true"></i>
+                <input placeholder="Pseudo / Email" class="col-md-7 form-control" type="text"
+                       id="username" name="_username" value="{{ last_username }}" />
+            </div>
+            <div class="row justify-content-center mt-1">
+                <i class="fa fa-unlock-alt input-group-addon col-md-1" aria-hidden="true"></i>
+                <input placeholder="Mot de passe" class="col-md-7 form-control" type="password"
+                       id="password" name="_password" />
+            </div>
+            <div class="row justify-content-center  mt-3 mb-1">
+                <input type="hidden" name="_target_path" value="{{ app.request.headers.get('referer') }}" />
+                <button class="col-md-8 btn btn-login" type="submit">Connexion</button>
+            </div>
+        </form>
+        <div class="row justify-content-center">
+            <a href="{{ path('user_registration') }}" class="btn btn-outline-login col-md-6">Créer un compte</a>
+        </div>
+        {% if error %}
+            <div class="row justify-content-center mt-4">
+                {{ error.messageKey|trans(error.messageData, 'security') }}
+            </div>
+        {% endif %}
+    </div>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="_password" />
-
-        {#
-            If you want to control the URL the user
-            is redirected to on success (more details below)
-            <input type="hidden" name="_target_path" value="/account" />
-        #}
-        <input type="hidden" name="_target_path" value="{{ app.request.headers.get('referer') }}" />
-        <button type="submit">login</button>
-    </form>
-
-    <a href="{{ path('user_registration') }}">Register</a>
 {% endblock %}
