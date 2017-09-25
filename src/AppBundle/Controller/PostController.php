@@ -29,15 +29,12 @@ class PostController extends Controller
 
     /**
      * @Route("/posts/{id}", name="post_detail")
-     * @param $id
+     * @param Post $post
      * @return \Symfony\Component\HttpFoundation\Response
+     * @internal param $id
      */
-    public function postAction($id)
+    public function postAction(Post $post)
     {
-        $post = $this->getDoctrine()->getRepository(Post::class)->find($id);
-        if (!$post) {
-            throw $this->createNotFoundException("Ce post n'existe pas");
-        }
         return $this->render('default/post.html.twig', [
            'post' => $post,
         ]);
@@ -46,15 +43,12 @@ class PostController extends Controller
     /**
      * @Route("/posts/{id}/delete", name="delete-post")
      * @Security("has_role('ROLE_ADMIN')")
-     * @param $id
+     * @param Post $post
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @internal param $id
      */
-    public function deletePostAction($id)
+    public function deletePostAction(Post $post)
     {
-        $post = $this->getDoctrine()->getRepository(Post::class)->find($id);
-        if (!$post) {
-            throw $this->createNotFoundException("Ce post n'existe pas");
-        }
         $em = $this->getDoctrine()->getManager();
         $em->remove($post);
         $em->flush();
@@ -65,12 +59,12 @@ class PostController extends Controller
      * @Route("/posts/{id}/edit", name="edit-post")
      * @Security("has_role('ROLE_ADMIN')")
      * @param Request $request
-     * @param $id
+     * @param Post $post
      * @return JsonResponse
+     * @internal param $id
      */
-    public function editPostAction(Request $request, $id)
+    public function editPostAction(Request $request, Post $post)
     {
-        $post = $this->getDoctrine()->getRepository(Post::class)->find($id);
         $postContent = $request->request->get('content');
         $post->setContent($postContent);
 
