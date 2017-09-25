@@ -49,7 +49,7 @@
                 });
             });
             $('#cancel').click(function () {
-                $('#modified-content').val("{{ post.content | raw }}");
+                $('#modified-content').val("{{ post.content | raw | replace({"\n":' ', "\r":' '})}}");
                 $('#content').toggle();
                 $('#editable-content').toggle();
             })
