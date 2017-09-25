@@ -22,7 +22,7 @@ class AdminController extends Controller
 {
 
     /**
-     * @Route("/posts/new", name="admin-new-post")
+     * @Route("/posts/new", name="admin_new_post")
      * @Security("has_role('ROLE_ADMIN')")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
