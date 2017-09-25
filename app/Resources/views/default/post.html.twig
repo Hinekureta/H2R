@@ -5,16 +5,35 @@
         <span class="cssload-loader hidden"><span class="cssload-loader-inner"></span></span>
     {% endif %}
 
-    <div id="root">
+    <div class="container mt-3 pl-xl-5 pr-xl-5 pt-1 pb-5 mb-5">
+
         {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ url('delete-post', {'id' : post.id}) }}">Delete</a>
-            <button id="modify-button" type="button">Modifier</button>
+            <div class="row justify-content-end">
+                <a class="btn btn-danger" href="{{ url('delete-post', {'id' : post.id}) }}">
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                </a>
+                <button class="btn btn-warning" id="modify-button" type="button">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </button>
+            </div>
+
         {% endif %}
-        <div>{{ post.date | date('d-m-Y') }}</div>
-        <h2>{{ post.title }}</h2>
-        <div id="content">
-            {{ post.content |raw }}
+
+        <div class="row align-items-center mb-4 mt-4">
+            <div class="col-md-2">
+                {{ post.date | date('d-m-Y') }}
+            </div>
+            <div class="col-md-4">
+                <h3 class="h3">
+                    <a href="{{ url('post_detail', {'id' : post.id}) }}">{{ post.title }}</a>
+                </h3>
+            </div>
         </div>
+        <div class="row">
+            <div id="content" class="col-md-12">{{ post.content | raw }}</div>
+        </div>
+
+
         {% if is_granted('ROLE_ADMIN') %}
             <div id="editable-content" class="hidden">
                 <input type="text" value="{{ post.content }}" id="modified-content">
