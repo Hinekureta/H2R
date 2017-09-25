@@ -12,21 +12,33 @@
     {% set route =  app.request.attributes.get('_route') %}
         {% block navbar %}
             <nav class="navbar navbar-toggleable-sm navbar-inverse bg-inverse">
-                <div class="navbar-nav">
-                    <a class="nav-item nav-link {% if route == 'homepage' %}active{% endif %}"
-                       href="{{ url('homepage') }}">Home</a>
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <a class="nav-item nav-link {% if route == 'admin_new_post' %}active{% endif %}"
-                           href="{{ url('admin_new_post') }}">New Post</a>
-                    {% endif %}
-                    {% if app.user %}
-                        <a class="nav-item nav-link" href="{{ url('logout') }}">Logout</a>
-                    {% else %}
-                        <a class="nav-item nav-link {% if route == 'login' %}active{% endif %}"
-                           href="{{ url('login') }}">Login</a>
-                        <a class="nav-item nav-link {% if route == 'user_registration' %}active{% endif %}"
-                           href="{{ url('user_registration') }}">Register</a>
-                    {% endif %}
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand" href="{{ url('homepage') }}">NomDuBlog</a>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item {% if route == 'homepage' %}active{% endif %}">
+                            <a class="nav-link" href="{{ url('homepage') }}">Home</a>
+                        </li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li class="nav-item {% if route == 'admin_new_post' %}active{% endif %}">
+                                <a class="nav-link" href="{{ url('admin_new_post') }}">New Post</a>
+                            </li>
+                        {% endif %}
+                        {% if app.user %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('logout') }}">Logout</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item {% if route == 'login' %}active{% endif %}">
+                            <a class="nav-link" href="{{ url('login') }}">Login</a>
+                        </li>
+                        <li class="nav-item {% if route == 'user_registration' %}active{% endif %}">
+                            <a class="nav-link" href="{{ url('user_registration') }}">Register</a>
+                        </li>
+                        {% endif %}
+                    </ul>
                 </div>
             </nav>
         {% endblock %}
