@@ -11,6 +11,11 @@
     left: 0;
 }
 
+.row-flex {
+    display: flex;
+    align-items: center;
+}
+
 .cssload-loader {
     position: fixed;
     top: 50%;

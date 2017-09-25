@@ -1,14 +1,27 @@
 {% extends 'base.html.twig' %}
 
+
 {% block body %}
-    <div id="root">
+    <div class="container">
         {% for post in posts %}
-            <a href="{{ url('post_detail', {'id' : post.id}) }}">
-                {{ post.date | date('d-m-Y') }}
-                <h3>{{ post.title }}</h3>
-                {{ post.content | raw }}
-            </a>
+            <div class="mt-5 mb-5">
+                <div class="row row-flex mb-4">
+                    <div class="col-md-2">
+                        {{ post.date | date('d-m-Y') }}
+                    </div>
+                    <div class="col-md-4">
+                        <h3 class="h3">
+                            <a href="{{ url('post_detail', {'id' : post.id}) }}">{{ post.title }}</a>
+                        </h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">{{ post.content | raw }}</div>
+                </div>
+            </div>
+            <hr>
         {% endfor %}
+    </div>
 {% endblock %}
 {% block javascripts %}
 {% endblock %}
