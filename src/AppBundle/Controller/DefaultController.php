@@ -21,10 +21,10 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/contact", name="contact")
+     * @Route("/about", name="about")
      */
-    public function contactAction()
+    public function aboutAction()
     {
-        return $this->render(':default:contact.html.twig');
+        return $this->render('default/about.html.twig');
     }
 }
