@@ -6,6 +6,7 @@ use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
@@ -45,7 +46,9 @@ class RegistrationController extends Controller
 
             $em->persist($user);
             $em->flush();
-
+            $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
+            $this->get('security.token_storage')->setToken($token);
+            $this->get('session')->set('_security_main',serialize($token));
             return $this->redirectToRoute('login');
         }
 
