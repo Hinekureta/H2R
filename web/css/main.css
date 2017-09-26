@@ -2,6 +2,10 @@
     display: none;
 }
 
+.shadow-container {
+    box-shadow: -10px 10px 15px #374036, 10px 10px 15px #374036 ;
+}
+
 .vertical-align {
     min-height: 80%;  /* Fallback for browsers do NOT support vh unit */
     min-height: 80vh; /* These two lines are counted as one :-)       */
