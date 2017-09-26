@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * Created by PhpStorm.
@@ -53,9 +54,13 @@ class RegistrationController extends Controller
         }
         $validator = $this->get('validator');
         $errors = $validator->validate($user);
+        $error = $errors->get(0)->getMessage();
+        $constraint = $errors->get(0)->getConstraint();
+        if ($constraint instanceof NotBlank)
+            $error = '';
         return $this->render(
             'security/register.html.twig',
-            ['form' => $form->createView(), 'errors' => $errors->get(0)->getMessage()]
+            ['form' => $form->createView(), 'errors' => $error]
         );
     }
 }
