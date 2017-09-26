@@ -50,6 +50,10 @@ class User implements UserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255, unique=true)
+     * @Assert\Email(
+     *     message = "L'email n'est pas au format désiré",
+     *     checkMX = true
+     * )
      */
     private $email;
 

@@ -51,10 +51,11 @@ class RegistrationController extends Controller
             $this->get('session')->set('_security_main',serialize($token));
             return $this->redirectToRoute('login');
         }
-
+        $validator = $this->get('validator');
+        $errors = $validator->validate($user);
         return $this->render(
             'security/register.html.twig',
-            ['form' => $form->createView()]
+            ['form' => $form->createView(), 'errors' => $errors->get(0)->getMessage()]
         );
     }
 }
