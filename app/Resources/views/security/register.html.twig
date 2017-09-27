@@ -1,38 +1,43 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="vertical-align">
-        <div class="container container-login mt-5 pl-5 pr-5 pt-5 pb-5 mb-5 shadow-container">
-            {{ form_start(form) }}
-            <div class="row justify-content-center">
-                <i class="fa fa-user-circle-o input-group-addon col-md-1" aria-hidden="true"></i>
-                {{ form_widget(form.username) }}
-            </div>
+        <div class="container-fluid fluid-padding">
+            <div class="row justify-content-center vertical-align">
+                <div class="col-md-5 content-block">
+                    <div class="row justify-content-center mb-4">
+                        <h3 class="col-md-10 text-center">Inscription</h3>
+                    </div>
+                    {{ form_start(form) }}
+                    <div class="row justify-content-center">
+                        <i class="fa fa-user-circle-o input-group-addon col-md-1" aria-hidden="true"></i>
+                        {{ form_widget(form.username) }}
+                    </div>
 
-            <div class="row justify-content-center mt-1">
-                <i class="fa fa-envelope input-group-addon col-md-1" aria-hidden="true"></i>
-                {{ form_widget(form.email) }}
-            </div>
+                    <div class="row justify-content-center mt-1">
+                        <i class="fa fa-envelope input-group-addon col-md-1" aria-hidden="true"></i>
+                        {{ form_widget(form.email) }}
+                    </div>
 
-            <div class="row justify-content-center mt-1">
-                <i class="fa fa-unlock-alt input-group-addon col-md-1" aria-hidden="true"></i>
-                {{ form_widget(form.plainPassword.first) }}
-            </div>
+                    <div class="row justify-content-center mt-1">
+                        <i class="fa fa-unlock-alt input-group-addon col-md-1" aria-hidden="true"></i>
+                        {{ form_widget(form.plainPassword.first) }}
+                    </div>
 
-            <div class="row justify-content-center mt-1">
-                <i class="fa fa-repeat input-group-addon col-md-1" aria-hidden="true"></i>
-                {{ form_widget(form.plainPassword.second) }}
-            </div>
+                    <div class="row justify-content-center mt-1">
+                        <i class="fa fa-repeat input-group-addon col-md-1" aria-hidden="true"></i>
+                        {{ form_widget(form.plainPassword.second) }}
+                    </div>
 
-            <div class="row justify-content-center mt-3">
-                <button class="col-md-8 btn btn-login" type="submit">Créer le compte</button>
-            </div>
-            {{ form_end(form) }}
+                    <div class="row justify-content-center mt-3">
+                        <button class="col-md-8 btn btn-login" type="submit">Créer le compte</button>
+                    </div>
+                    {{ form_end(form) }}
 
-            <div class="row justify-content-center mt-3">
-                <p class="col-md-8 text-danger text-md-center">{{ errors }}</p>
+                    <div class="row justify-content-center mt-3">
+                        <p class="col-md-8 text-danger text-md-center">{{ errors }}</p>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
 {% endblock %}
