@@ -1,34 +1,39 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="vertical-align">
-        <div class="container container-login mt-5 pl-5 pr-5 pt-5 pb-5 mb-5 shadow-container">
-            <form action="{{ path('login') }}" method="post">
-                <div class="row justify-content-center">
-                    <i class="fa fa-user-circle-o input-group-addon col-md-1" aria-hidden="true"></i>
-                    <input placeholder="Pseudo / Email" class="col-md-7 form-control" type="text"
-                           id="username" name="_username" value="{{ last_username }}" required />
+        <div class="container-fluid fluid-padding">
+            <div class="row justify-content-center vertical-align">
+                <div class="col-md-5 content-block">
+                    <div class="row justify-content-center mb-4">
+                        <h3 class="col-md-10 text-center">Connexion</h3>
+                    </div>
+                    <form action="{{ path('login') }}" method="post">
+                        <div class="row justify-content-center">
+                            <i class="fa fa-user-circle-o input-group-addon col-md-1" aria-hidden="true"></i>
+                            <input placeholder="Pseudo / Email" class="col-md-7 form-control" type="text"
+                                   id="username" name="_username" value="{{ last_username }}" required />
+                        </div>
+                        <div class="row justify-content-center mt-1">
+                            <i class="fa fa-unlock-alt input-group-addon col-md-1" aria-hidden="true"></i>
+                            <input placeholder="Mot de passe" class="col-md-7 form-control" type="password"
+                                   id="password" name="_password" required/>
+                        </div>
+                        <div class="row justify-content-center  mt-3 mb-1">
+                            <input type="hidden" name="_target_path" value="{{ app.request.headers.get('referer') }}" />
+                            <button class="col-md-8 btn btn-login" type="submit">Connexion</button>
+                        </div>
+                    </form>
+                    <div class="row justify-content-center">
+                        <a href="{{ path('user_registration') }}" class="btn btn-outline-login col-md-6">Créer un compte</a>
+                    </div>
+                    {% if error %}
+                        <div class="row justify-content-center mt-4">
+                            {{ error.messageKey|trans(error.messageData, 'security') }}
+                        </div>
+                    {% endif %}
                 </div>
-                <div class="row justify-content-center mt-1">
-                    <i class="fa fa-unlock-alt input-group-addon col-md-1" aria-hidden="true"></i>
-                    <input placeholder="Mot de passe" class="col-md-7 form-control" type="password"
-                           id="password" name="_password" required/>
-                </div>
-                <div class="row justify-content-center  mt-3 mb-1">
-                    <input type="hidden" name="_target_path" value="{{ app.request.headers.get('referer') }}" />
-                    <button class="col-md-8 btn btn-login" type="submit">Connexion</button>
-                </div>
-            </form>
-            <div class="row justify-content-center">
-                <a href="{{ path('user_registration') }}" class="btn btn-outline-login col-md-6">Créer un compte</a>
             </div>
-            {% if error %}
-                <div class="row justify-content-center mt-4">
-                    {{ error.messageKey|trans(error.messageData, 'security') }}
-                </div>
-            {% endif %}
-        </div>
-    </div>
 
+        </div>
 
 {% endblock %}
