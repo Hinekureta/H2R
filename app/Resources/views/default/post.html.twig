@@ -5,42 +5,47 @@
         <span class="cssload-loader hidden"><span class="cssload-loader-inner"></span></span>
     {% endif %}
 
-    <div class="container mt-3 pl-5 pr-5 pt-1 pb-5 mb-5 shadow-container">
+    <div class="container-fluid fluid-padding">
+        <div class="row justify-content-center">
+            <div class="col-md-8 content-block">
+                {% if is_granted('ROLE_ADMIN') %}
+                    <div class="row justify-content-end">
+                        <a class="btn btn-danger col-md-auto" href="{{ url('delete-post', {'id' : post.id}) }}">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        </a>
+                        <button class="btn btn-warning col-md-auto" id="modify-button" type="button">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </button>
+                    </div>
 
-        {% if is_granted('ROLE_ADMIN') %}
-            <div class="row justify-content-end">
-                <a class="btn btn-danger" href="{{ url('delete-post', {'id' : post.id}) }}">
-                    <i class="fa fa-trash-o" aria-hidden="true"></i>
-                </a>
-                <button class="btn btn-warning" id="modify-button" type="button">
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                </button>
-            </div>
+                {% endif %}
 
-        {% endif %}
+                <div class="row justify-content-between mb-4 mt-4">
+                    <div class="col-md-5">
+                        <h3 class="h3">
+                            <a href="{{ url('post_detail', {'id' : post.id}) }}">{{ post.title }}</a>
+                        </h3>
+                    </div>
+                    <div class="col-md-5 date-style text-right">
+                        {{ post.date | date('d-m-Y') }}
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div id="content" class="col-md-12">{{ post.content | raw }}</div>
+                </div>
 
-        <div class="row justify-content-between mb-4 mt-4">
-            <div class="col-md-4">
-                <h3 class="h3">
-                    <a href="{{ url('post_detail', {'id' : post.id}) }}">{{ post.title }}</a>
-                </h3>
-            </div>
-            <div class="col-md-2 date-style">
-                {{ post.date | date('d-m-Y') }}
+
+                {% if is_granted('ROLE_ADMIN') %}
+                    <div id="editable-content" class="hidden">
+                        <input type="text" value="{{ post.content }}" id="modified-content">
+                        <button type="button" class="btn btn-success" id="validate">Validate</button>
+                        <button type="button" class="btn btn-danger" id="cancel">Cancel</button>
+                    </div>
+                {% endif %}
             </div>
         </div>
-        <div class="row">
-            <div id="content" class="col-md-12">{{ post.content | raw }}</div>
-        </div>
 
-
-        {% if is_granted('ROLE_ADMIN') %}
-            <div id="editable-content" class="hidden">
-                <input type="text" value="{{ post.content }}" id="modified-content">
-                <button type="button" class="btn btn-success" id="validate">Validate</button>
-                <button type="button" class="btn btn-danger" id="cancel">Cancel</button>
-            </div>
-        {% endif %}
     </div>
 
 {% endblock %}
