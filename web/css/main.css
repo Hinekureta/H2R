@@ -2,8 +2,17 @@
     display: none;
 }
 
-.shadow-container {
+.fluid-padding {
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 5%;
+}
+
+.content-block {
+    background-color: #F9F9F9;
     box-shadow: -10px 10px 15px #374036, 10px 10px 15px #374036 ;
+    padding: 2.5% 7% 5% 7%;
+    margin-bottom: 5%;
 }
 
 .vertical-align {

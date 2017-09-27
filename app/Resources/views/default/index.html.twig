@@ -2,30 +2,53 @@
 
 
 {% block body %}
-    <div class="container mt-5 pl-5 pr-5 pt-1 shadow-container">
-        {% for post in posts|reverse %}
-            <div class="mt-5 mb-5">
-                <div class="row justify-content-between mb-4">
-                    <div class="col-md-4">
-                        <h3 class="h3">
-                            <a href="{{ url('post_detail', {'id' : post.id}) }}">{{ post.title }}</a>
-                        </h3>
+    <div class="container-fluid fluid-padding">
+        <div class="row justify-content-between">
+            <div class="col-md-3">
+                <div class="content-block shadow-container">
+                    <div class="row justify-content-center">
+                        <h3 class="col-md-10">Chanson du jour : </h3>
                     </div>
-                    <div class="col-md-2 date-style">
-                        {{ post.date | date('d-m-Y') }}
+                    <div class="row justify-content-center">
+                        <iframe src="https://open.spotify.com/embed?uri=spotify:track:5qTvkDrSfvwDv6RBjjcfQr"
+                                width="300" height="80" class="col-md-10" frameborder="0"
+                                allowtransparency="true">
+                        </iframe>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">{{ post.content | slice(0, 2042) | raw }}</div>
-                </div>
-                {% if post.content | length > 2042 %}
-                    <div class="row mt-2">
-                        <a class="col-md-3" href="{{ url('post_detail', {'id' : post.id}) }}">Lire la suite...</a>
-                    </div>
-                {% endif %}
             </div>
-            <hr>
-        {% endfor %}
+
+            <div class="col-md-8">
+                {% for post in posts|reverse %}
+                    <div class="content-block">
+                        <div class="row justify-content-between mb-4">
+                            <div class="col-md-4">
+                                <h3 class="h3">
+                                    <a href="{{ url('post_detail', {'id' : post.id}) }}">{{ post.title }}</a>
+                                </h3>
+                            </div>
+                            <div class="col-md-2 date-style">
+                                {{ post.date | date('d-m-Y') }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-12">{{ post.content | slice(0, 2042) | raw }}</div>
+                        </div>
+                        {% if post.content | length > 2042 %}
+                            <div class="row mt-2">
+                                <a class="col-md-3" href="{{ url('post_detail', {'id' : post.id}) }}">Lire la suite...</a>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    {#<hr>#}
+                {% endfor %}
+            </div>
+
+        </div>
+
+
     </div>
 {% endblock %}
 {% block javascripts %}
