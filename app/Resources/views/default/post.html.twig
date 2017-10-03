@@ -1,10 +1,5 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    {% if is_granted('ROLE_ADMIN') %}
-        <div class="loader-background hidden"></div>
-        <span class="cssload-loader hidden"><span class="cssload-loader-inner"></span></span>
-    {% endif %}
-
     <div class="container-fluid fluid-padding">
         <div class="row justify-content-center">
             <div class="col-md-8 content-block">
@@ -52,16 +47,12 @@
 {% block javascripts %}
     <script>
         $(document).ready(function () {
-            function showLoader() {
-                $('.cssload-loader').toggle();
-                $('.loader-background').toggle();
-            }
             $('#modify-button').click(function () {
                 $('#content').toggle();
                 $('#editable-content').toggle();
             });
             $('#validate').click(function () {
-                showLoader();
+                toggleLoader();
                 var modifiedContent = $('#modified-content').val();
                 var url = "{{ url('edit-post', {'id':post.id})}}";
                 $.ajax({

@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container-fluid fluid-padding">
+        <div class="row justify-content-center">
+            <div class="col-md-10 content-block">
+                <div class="row justify-content-center">
+                    <h3 class="h3 text-center col-md-12">NBA Ipsum Generator</h3>
+                </div>
+                <div class="row justify-content-center mt-4">
+                    <p class="col-md-8 text-center">
+                        Générateur de 'Lorem ipsum' revisité sur le thème des joueurs NBA actuels.<br>
+                        Seulement les noms des joueurs sont utilisés.
+                    </p>
+                </div>
+                <div class="row justify-content-center mt-4">
+                    <h5 class="col-md-2 h4 text-center">Nombre de paragraphe : </h5>
+                    <input class="col-md-1 ml-2" type="number" name="numberOfParagraph"
+                           id="numberOfParagraph" value="1">
+                    <button class="col-md-1 btn btn-primary ml-2" id="generate-ipsum">Générer</button>
+                </div>
+                <div class="row mt-5" id="generated-content"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            $("#generate-ipsum").click(function () {
+                toggleLoader();
+                var url = "{{ url('generate-ipsum')}}";
+                $.ajax({
+                    url: url,
+                    method: 'post',
+                    data: {paragraphNumber : $('#numberOfParagraph').val()}
+                }).done(function (response) {
+                    $('#generated-content').html("");
+                    response['paragraphs'].forEach(function (element) {
+                        $('#generated-content').append(
+                          '<p>' + element + '</p><br>'
+                        );
+                    });
+                    toggleLoader();
+                });
+            })
+        })
+    </script>
+{% endblock %}
