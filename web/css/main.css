@@ -1,3 +1,9 @@
+
+.index-button {
+    background-color: rgb(61, 117, 169);
+    padding: 5%;
+}
+
 .hidden {
     display: none;
 }
