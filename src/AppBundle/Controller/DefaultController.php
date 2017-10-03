@@ -27,4 +27,12 @@ class DefaultController extends Controller
     {
         return $this->render('default/about.html.twig');
     }
+
+    /**
+     * @Route("/author", name="author")
+     */
+    public function authorAction()
+    {
+        return $this->render(':default:author.html.twig');
+    }
 }

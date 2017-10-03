@@ -2,6 +2,19 @@
     display: none;
 }
 
+.fill-remaining-height {
+    display: inline-flex;
+    height: 100%;
+}
+
+.height-70 {
+    height: 70vh;
+}
+
+.mt-30 {
+    margin-top: 30vh;
+}
+
 .fluid-padding {
     margin-left: 5%;
     margin-right: 5%;

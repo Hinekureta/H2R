@@ -1,0 +1,166 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <style>
+        body {
+            background-color: #1d1e1f !important;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    <div class="container-fluid fluid-padding mt-2">
+        <div class="row justify-content-between mb-5">
+            <div class="col-md-4 align-self-center text-white ml-5 pl-3">
+                Ingénieur fraichement diplômé au sein de la promotion 2017 de l'EPITA.
+                Je me suis spécialisé dans les nouvelles technologies et dispose de bonnes
+                connaissances en web et mobile. <br>
+                Lors de mon stage de fin d'études j'ai pu utiliser le framework Symfony 2 afin
+                participer aux évolutions de la plateforme web d'une jeune startup. J'ai depuis
+                décider de m'intéresser plus en profondeur à la multitude de possibilités qu'offre
+                ce framework.<br>
+                <br>
+                Entrepreneur dans l'âme je suis toujours à l'écoute pour discuté de n'importe
+                quelle opportunité.
+                N'hésitez pas à prendre contact avec moi pour toute demande d'information.<br>
+                <br>
+                <b>kevinh2rblog@gmail.com</b>
+            </div>
+            <div class="col-md-6 text-right align-self-center text-white">
+                <canvas class="mt-auto" id="myRadarChart"
+                        style="position: relative; width: auto; height:auto;"></canvas>
+            </div>
+        </div>
+
+        <div class="row justify-content-between">
+            <div class="col-md-5 text-center align-self-center">
+                <canvas class="mt-auto" id="myBarChart"
+                        style="position: relative; width: auto; height:auto;"></canvas>
+            </div>
+            <div class="col-md-5 text-center align-self-center">
+                <canvas class="mt-auto" id="myChart"
+                        style="position: relative; width: auto; height:auto;"></canvas>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+{% block javascripts %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
+    <script>
+        var ctx = document.getElementById("myChart").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ["Français", "Allemand", "Anglais", "Portugais"],
+                datasets: [{
+                    data: [45, 8, 35, 12],
+                    backgroundColor: [
+                        'rgba(174, 41, 41, 0.9)',
+                        'rgba(80, 138, 195, 1)',
+                        'rgba(190, 128, 65, 1)',
+                        'rgba(60, 170, 82, 1)'
+                    ],
+                    borderColor: [
+                        'rgba(246, 218, 218, 1)',
+                        'rgba(246, 218, 218, 1)',
+                        'rgba(246, 218, 218, 1)',
+                        'rgba(246, 218, 218, 1)'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+
+            options: {
+                responsive:true,
+                responsiveAnimationDuration : 500
+            }
+        });
+
+
+        var ctx_bar = document.getElementById("myBarChart").getContext('2d');
+        var myBarChart = new Chart(ctx_bar, {
+            type: 'bar',
+            data: {
+                labels: ["Symfony 2/3", "PHP (général)", "Android", "C++", "Design", "HTML5/CSS3/JS", ".NET"],
+                datasets: [{
+                    data: [15, 12, 11, 8, 14, 14, 6],
+                    backgroundColor: [
+                        'rgba(174, 41, 41, 0.9)',
+                        'rgba(174, 41, 41, 0.9)',
+                        'rgba(80, 138, 195, 1)',
+                        'rgba(80, 138, 195, 1)',
+                        'rgba(174, 41, 41, 0.9)',
+                        'rgba(174, 41, 41, 0.9)',
+                        'rgba(80, 138, 195, 1)'
+                    ],
+                    borderColor: [
+                        'rgba(246, 218, 218, 1)',
+                        'rgba(246, 218, 218, 1)',
+                        'rgba(246, 218, 218, 1)',
+                        'rgba(246, 218, 218, 1)',
+                        'rgba(246, 218, 218, 1)',
+                        'rgba(246, 218, 218, 1)',
+                        'rgba(246, 218, 218, 1)'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+
+            options: {
+                responsive:true,
+                responsiveAnimationDuration : 500,
+                legend: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+
+        var ctx_polar = document.getElementById("myRadarChart").getContext('2d');
+        var myRadarChart = new Chart(ctx_polar, {
+            type: 'radar',
+            data: {
+                labels: ["API", "Design Pattern", "Gestion de projet", "Capacité d'adaptation",
+                "Autonomie", "Communication"],
+                datasets: [{
+                    pointRadius: 5,
+                    pointBackgroundColor: 'rgba(174, 82, 82, 0.9)',
+                    pointHoverRadius: 8,
+                    data: [15, 9, 11, 17, 15, 16],
+
+                    backgroundColor: [
+                        'rgba(80, 138, 195, 0.4)'
+                    ],
+                    borderColor: [
+                        'rgba(246, 218, 218, 1)'
+                    ],
+                    borderWidth: 2,
+                    pointStyle: 'circle',
+                }]
+            },
+
+            options: {
+                responsive:true,
+                responsiveAnimationDuration : 500,
+                legend: {
+                    display: false
+                },
+                scale: {
+                    ticks: {
+                        beginAtZero: true,
+                        min: 0,
+                        max: 20,
+                        backgroundColor: 'rgba(255,0,0,1)'
+                    }
+                }
+            }
+        });
+    </script>
+{% endblock %}
