@@ -53,6 +53,10 @@ class MiscController extends Controller
         $rawFile = file_get_contents('nba.kev');
         $data = unserialize($rawFile);
         $numberOfParagraph = $request->request->get('paragraphNumber');
+        if (!is_numeric($numberOfParagraph) || $numberOfParagraph < 1)
+            $numberOfParagraph = 1;
+        if ($numberOfParagraph > 50)
+            $numberOfParagraph = 50;
         $paragraphs = [];
         for ($i = 0; $i < $numberOfParagraph; ++$i) {
             $paragraph = [];
