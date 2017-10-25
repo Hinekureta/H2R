@@ -3,6 +3,18 @@
     border: 1px solid red;
 }
 
+.my-text-white {
+    color: #d6d6d6;
+}
+
+.my-text-green {
+    color: #55b56e;
+}
+
+.my-text-red {
+    color: #d05549;
+}
+
 .index-button {
     background-color: rgb(61, 117, 169);
     padding: 5%;

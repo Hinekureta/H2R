@@ -1,23 +1,108 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <div class="container-fluid fluid-padding">
-        <div class="row justify-content-between text-center">
-            <div class="col-md-3"></div>
-            <div class="col-md-3">Started with : </div>
-            <div class="col-md-3">Current value : </div>
-            <div class="col-md-3">Currency rate (€) :</div>
-        </div>
-        <div class="row justify-content-between text-center">
-            <div class="col-md-3">BITCOIN</div>
-            <div class="col-md-3">18.27</div>
-            <div class="col-md-3">YYY</div>
-            <div class="col-md-3">DDD</div>
-        </div>
-        <div class="row justify-content-between text-center">
-            <div class="col-md-3">Ethereum</div>
-            <div class="col-md-3">18.09</div>
-            <div class="col-md-3">YYY</div>
-            <div class="col-md-3">DDD</div>
+    <div class="container-fluid fluid-padding my-text-white">
+        <div class="row">
+            <div class="col-md-1">
+                <div class="row mb-5 text-center"><div class="col-md-12">Currency</div></div>
+                <div class="row mb-4 text-center">
+                    <div class="col-md-12"><i class="fa fa-btc" aria-hidden="true"></i></div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-md-12">Eth</div>
+                </div>
+            </div>
+            <div class="col-md-11">
+                <div class="row justify-content-between text-center mb-5">
+                    <div class="col-md-4">Started with (btc / eur) : </div>
+                    <div class="col-md-4">Current value (btc / eur) : </div>
+                    <div class="col-md-4">Currency rate (€) :</div>
+                </div>
+                <div class="row justify-content-between text-center mb-4">
+                    <div class="col-md-4">
+                        <span id="btc-input">0.00376</span> / 18.27 (<span id="btc-start"></span>)
+                    </div>
+                    <div class="col-md-4" id="btc-output"></div>
+                    <div class="col-md-4" id="btc-rate"></div>
+                </div>
+                <div class="row justify-content-between text-center">
+                    <div class="col-md-4">
+                        <span id="eth-input">0.0715</span> / 18.09 (<span id="eth-start"></span>)
+                    </div>
+                    <div class="col-md-4" id="eth-output"></div>
+                    <div class="col-md-4" id="eth-rate"></div>
+                </div>
+            </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var btcStart = 18.27 / 0.003746731;
+            $('#btc-start').html(btcStart.toFixed(3));
+            var ethStart = 18.09 / 0.0715;
+            $('#eth-start').html(ethStart.toFixed(3));
+
+            $.ajax({
+                url: "https://api.coinmarketcap.com/v1/ticker/bitcoin/?convert=EUR",
+                method: 'GET'
+            }).done(function (response) {
+                var btcInput = $('#btc-input').html();
+                response = response[0];
+                var latestVal = response['price_eur'];
+                var currentEur = latestVal * btcInput;
+                var currentBtc = currentEur / latestVal;
+                console.log(currentBtc);
+                console.log(btcInput);
+                $('#btc-rate').html(latestVal);
+                if (currentBtc < btcInput) {
+                    $('#btc-output').html(
+                        "<span class='my-text-red'>" +
+                        currentBtc.toFixed(3) + " / " + currentEur.toFixed(3) +
+                            "</span>"
+                    );
+                }
+                else {
+                    $('#btc-output').html(
+                        "<span class='my-text-green'>" +
+                        currentBtc.toFixed(3) + " / " + currentEur.toFixed(3) +
+                        "</span>"
+                    );
+                }
+            });
+
+            $.ajax({
+                url: "https://api.coinmarketcap.com/v1/ticker/ethereum/?convert=EUR",
+                method: 'GET'
+            }).done(function (response) {
+                var ethInput = $('#eth-input').html();
+                response = response[0];
+                var latestVal = response['price_eur'];
+                var currentEur = latestVal * ethInput;
+                var currentEth = currentEur / latestVal;
+                console.log(currentEth);
+                console.log(ethInput);
+                $('#eth-rate').html(latestVal);
+                if (currentEth < ethInput) {
+                    $('#eth-output').html(
+                        "<span class='my-text-red'>" +
+                        currentEth.toFixed(3) + " / " + currentEur.toFixed(3) +
+                        "</span>"
+                    );
+                }
+                else {
+                    $('#eth-output').html(
+                        "<span class='my-text-green'>" +
+                        currentEth.toFixed(3) + " / " + currentEur.toFixed(3) +
+                        "</span>"
+                    );
+                }
+            });
+
+
+
+        });
+    </script>
 {% endblock %}
