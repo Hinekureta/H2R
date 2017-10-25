@@ -13,20 +13,24 @@
             </div>
             <div class="col-md-11">
                 <div class="row justify-content-between text-center mb-5">
-                    <div class="col-md-4">Started with (btc / eur) : </div>
-                    <div class="col-md-4">Current value (btc / eur) : </div>
+                    <div class="col-md-4">Started with : </div>
+                    <div class="col-md-4">Current value (€) : </div>
                     <div class="col-md-4">Currency rate (€) :</div>
                 </div>
                 <div class="row justify-content-between text-center mb-4">
                     <div class="col-md-4">
-                        <span id="btc-input">0.00376</span> / 18.27 (<span id="btc-start"></span>)
+                        <span id="btc-input">0.00376</span> /
+                        <span id="eur-btc-input">18.27</span>
+                        (<span id="btc-start"></span>)
                     </div>
                     <div class="col-md-4" id="btc-output"></div>
                     <div class="col-md-4" id="btc-rate"></div>
                 </div>
                 <div class="row justify-content-between text-center">
                     <div class="col-md-4">
-                        <span id="eth-input">0.0715</span> / 18.09 (<span id="eth-start"></span>)
+                        <span id="eth-input">0.0715</span> /
+                        <span id="eur-eth-input">18.09</span>
+                        (<span id="eth-start"></span>)
                     </div>
                     <div class="col-md-4" id="eth-output"></div>
                     <div class="col-md-4" id="eth-rate"></div>
@@ -50,24 +54,22 @@
                 method: 'GET'
             }).done(function (response) {
                 var btcInput = $('#btc-input').html();
+                var eurInput = $('#eur-btc-input').html();
                 response = response[0];
                 var latestVal = response['price_eur'];
                 var currentEur = latestVal * btcInput;
-                var currentBtc = currentEur / latestVal;
-                console.log(currentBtc);
-                console.log(btcInput);
                 $('#btc-rate').html(latestVal);
-                if (currentBtc < btcInput) {
+                if (currentEur < eurInput) {
                     $('#btc-output').html(
                         "<span class='my-text-red'>" +
-                        currentBtc.toFixed(3) + " / " + currentEur.toFixed(3) +
-                            "</span>"
+                        currentEur.toFixed(3) +
+                        "</span>"
                     );
                 }
                 else {
                     $('#btc-output').html(
                         "<span class='my-text-green'>" +
-                        currentBtc.toFixed(3) + " / " + currentEur.toFixed(3) +
+                        currentEur.toFixed(3) +
                         "</span>"
                     );
                 }
@@ -78,24 +80,22 @@
                 method: 'GET'
             }).done(function (response) {
                 var ethInput = $('#eth-input').html();
+                var eurInput = $('#eur-eth-input').html();
                 response = response[0];
                 var latestVal = response['price_eur'];
                 var currentEur = latestVal * ethInput;
-                var currentEth = currentEur / latestVal;
-                console.log(currentEth);
-                console.log(ethInput);
                 $('#eth-rate').html(latestVal);
-                if (currentEth < ethInput) {
+                if (currentEur < eurInput) {
                     $('#eth-output').html(
                         "<span class='my-text-red'>" +
-                        currentEth.toFixed(3) + " / " + currentEur.toFixed(3) +
+                        currentEur.toFixed(3) +
                         "</span>"
                     );
                 }
                 else {
                     $('#eth-output').html(
                         "<span class='my-text-green'>" +
-                        currentEth.toFixed(3) + " / " + currentEur.toFixed(3) +
+                        currentEur.toFixed(3) +
                         "</span>"
                     );
                 }
