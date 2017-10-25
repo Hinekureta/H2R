@@ -1,4 +1,8 @@
 
+.border-test {
+    border: 1px solid red;
+}
+
 .index-button {
     background-color: rgb(61, 117, 169);
     padding: 5%;

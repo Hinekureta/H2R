@@ -52,4 +52,13 @@ class AdminController extends Controller
             'form' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/coins", name="admin_coins")
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function showCoinsAction()
+    {
+        return $this->render('admin/coins.html.twig');
+    }
 }
