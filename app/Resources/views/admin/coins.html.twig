@@ -7,8 +7,11 @@
                 <div class="row mb-4 text-center">
                     <div class="col-md-12"><i class="fa fa-btc" aria-hidden="true"></i></div>
                 </div>
-                <div class="row text-center">
+                <div class="row mb-4 text-center">
                     <div class="col-md-12">Eth</div>
+                </div>
+                <div class="row mb-4 text-center">
+                    <div class="col-md-12">Ltc</div>
                 </div>
             </div>
             <div class="col-md-11">
@@ -26,7 +29,7 @@
                     <div class="col-md-4" id="btc-output"></div>
                     <div class="col-md-4" id="btc-rate"></div>
                 </div>
-                <div class="row justify-content-between text-center">
+                <div class="row justify-content-between text-center mb-4">
                     <div class="col-md-4">
                         <span id="eth-input">0.0715</span> /
                         <span id="eur-eth-input">18.51</span>
@@ -34,6 +37,15 @@
                     </div>
                     <div class="col-md-4" id="eth-output"></div>
                     <div class="col-md-4" id="eth-rate"></div>
+                </div>
+                <div class="row justify-content-between text-center mb-4">
+                    <div class="col-md-4">
+                        <span id="ltc-input">0.4921</span> /
+                        <span id="eur-ltc-input">23.51</span>
+                        (<span id="ltc-start"></span>)
+                    </div>
+                    <div class="col-md-4" id="ltc-output"></div>
+                    <div class="col-md-4" id="ltc-rate"></div>
                 </div>
             </div>
         </div>
@@ -48,6 +60,8 @@
             $('#btc-start').html(btcStart.toFixed(3));
             var ethStart = 18.09 / 0.0715;
             $('#eth-start').html(ethStart.toFixed(3));
+            var ltcStart = 23.51 / 0.4921;
+            $('#ltc-start').html(ltcStart.toFixed(3));
 
             $.ajax({
                 url: "https://api.coinmarketcap.com/v1/ticker/bitcoin/?convert=EUR",
@@ -94,6 +108,32 @@
                 }
                 else {
                     $('#eth-output').html(
+                        "<span class='my-text-green'>" +
+                        currentEur.toFixed(3) +
+                        "</span>"
+                    );
+                }
+            });
+
+            $.ajax({
+                url: "https://api.coinmarketcap.com/v1/ticker/litecoin/?convert=EUR",
+                method: 'GET'
+            }).done(function (response) {
+                var ltcInput = $('#ltc-input').html();
+                var eurInput = $('#eur-ltc-input').html();
+                response = response[0];
+                var latestVal = response['price_eur'];
+                var currentEur = latestVal * ltcInput;
+                $('#ltc-rate').html(latestVal);
+                if (currentEur < eurInput) {
+                    $('#ltc-output').html(
+                        "<span class='my-text-red'>" +
+                        currentEur.toFixed(3) +
+                        "</span>"
+                    );
+                }
+                else {
+                    $('#ltc-output').html(
                         "<span class='my-text-green'>" +
                         currentEur.toFixed(3) +
                         "</span>"
