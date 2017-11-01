@@ -2,13 +2,13 @@
 {% block body %}
     <div class="container-fluid fluid-padding">
         <div class="row justify-content-center">
-            <div class="col-md-8 content-block">
+            <div class="col-lg-8 content-block">
                 {% if is_granted('ROLE_ADMIN') %}
                     <div class="row justify-content-end">
-                        <a class="btn btn-danger col-md-auto" href="{{ url('delete-post', {'id' : post.id}) }}">
+                        <a class="btn btn-danger col-lg-auto" href="{{ url('delete-post', {'id' : post.id}) }}">
                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                         </a>
-                        <button class="btn btn-warning col-md-auto" id="modify-button" type="button">
+                        <button class="btn btn-warning col-lg-auto" id="modify-button" type="button">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                         </button>
                     </div>
@@ -16,18 +16,18 @@
                 {% endif %}
 
                 <div class="row justify-content-between mb-4 mt-4">
-                    <div class="col-md-5">
+                    <div class="col-lg-5">
                         <h3 class="h3">
                             <a href="{{ url('post_detail', {'id' : post.id}) }}">{{ post.title }}</a>
                         </h3>
                     </div>
-                    <div class="col-md-5 date-style text-right">
+                    <div class="col-lg-5 date-style text-right">
                         {{ post.date | date('d-m-Y') }}
                     </div>
                 </div>
                 <hr>
                 <div class="row">
-                    <div id="content" class="col-md-12">{{ post.content | raw }}</div>
+                    <div id="content" class="col-lg-12">{{ post.content | raw }}</div>
                 </div>
 
 
