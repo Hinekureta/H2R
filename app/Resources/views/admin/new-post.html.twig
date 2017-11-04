@@ -8,11 +8,12 @@
         {{ form_end(form) }}
     </div>
 
+
     {% for movie in movies %}
-        <a href="{{ asset('movies/' + movie) }}">{{ movie }}</a>
+        <a href="{{ asset('movies/' ~ movie) }}">{{ movie }}</a>
     {% endfor %}
-    {% for serie in series%}
-        <a href="{{ asset('series/' + serie) }}">{{ serie }}</a>
+    {% for show in shows %}
+        <a href="{{ asset('series/' ~ show) }}">{{ show }}</a>
     {% endfor %}
 
 {% endblock %}
