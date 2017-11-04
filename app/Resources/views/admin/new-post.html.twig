@@ -2,18 +2,37 @@
 
 
 {% block body %}
-    <div class="container mt-3 pl-5 pr-5 pt-1 shadow-container">
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        {{ form_end(form) }}
+    <div class="container-fluid fluid-padding">
+        <div class="content-block">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        </div>
+
+        <div class="content-block">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h3 class="mb-3 text-center">MOVIES</h3>
+                    {% for movie in movies %}
+                        <div class="row">
+                            <a href="{{ asset('movies/' ~ movie) }}">{{ movie }}</a>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="col-lg-6">
+                    <h3 class="mb-3 text-center">SHOWS</h3>
+                    {% for show in shows %}
+                        <div class="row">
+                            <a href="{{ asset('series/' ~ show) }}">{{ show }}</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+
     </div>
 
 
-    {% for movie in movies %}
-        <a href="{{ asset('movies/' ~ movie) }}">{{ movie }}</a>
-    {% endfor %}
-    {% for show in shows %}
-        <a href="{{ asset('series/' ~ show) }}">{{ show }}</a>
-    {% endfor %}
 
 {% endblock %}
