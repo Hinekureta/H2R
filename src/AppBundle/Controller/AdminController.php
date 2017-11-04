@@ -48,8 +48,14 @@ class AdminController extends Controller
             return $this->redirectToRoute('homepage');
         }
 
+        $series = scandir('./series');
+        $movies = scandir('./movies');
+        $series = array_slice($series, 2);
+        $movies = array_slice($movies, 2);
         return $this->render(':admin:new-post.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'movies' => $movies,
+            'series' => $series,
         ]);
     }
 }
