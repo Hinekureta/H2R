@@ -6,7 +6,7 @@
  * Time: 22:06
  */
 
-namespace AppBundle\Controller;
+namespace AppBundle\Controller\Admin;
 
 
 use AppBundle\Entity\Post;

@@ -78,5 +78,10 @@ class Role implements RoleInterface
     {
         return $this->name;
     }
+
+    public function isAdmin()
+    {
+        return $this->name === 'ROLE_ADMIN';
+    }
 }
 

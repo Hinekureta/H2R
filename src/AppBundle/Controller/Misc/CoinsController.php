@@ -6,7 +6,7 @@
  * Time: 22:01
  */
 
-namespace AppBundle\Controller;
+namespace AppBundle\Controller\Misc;
 
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -19,7 +19,7 @@ class CoinsController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('admin/coins.html.twig');
+        return $this->render(':misc:coins.html.twig');
     }
 
 }

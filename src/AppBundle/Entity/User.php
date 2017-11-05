@@ -66,7 +66,7 @@ class User implements UserInterface, \Serializable
 
 
     /**
-     * @var string
+     * @var Role
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Role")
      * @ORM\JoinTable(name="users_roles",
      *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
@@ -289,6 +289,16 @@ class User implements UserInterface, \Serializable
     {
         if ($role->getName() != 'ROLE_ADMIN')
             $this->roles->add($role);
+    }
+
+    public function isAdmin()
+    {
+        foreach ($this->roles as $role) {
+            if ($role->isAdmin()) {
+                return true;
+            }
+        }
+        return false;
     }
 }
 
