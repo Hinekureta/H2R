@@ -40,7 +40,6 @@ class MiscController extends Controller
      */
     public function nbaIpsumGeneratorAction(Request $request)
     {
-
         return $this->render(':misc:nba-ipsum.html.twig');
     }
 
@@ -52,27 +51,8 @@ class MiscController extends Controller
      */
     public function generateIpsumAction(Request $request, NbaIpsumGeneratorService $ipsumGeneratorService)
     {
-        $rawFile = file_get_contents('nba.kev');
-        $data = unserialize($rawFile);
         $numberOfParagraph = $request->request->get('paragraphNumber');
-        if (!is_numeric($numberOfParagraph) || $numberOfParagraph < 1)
-            $numberOfParagraph = 1;
-        if ($numberOfParagraph > 50)
-            $numberOfParagraph = 50;
-        $paragraphs = [];
-        for ($i = 0; $i < $numberOfParagraph; ++$i) {
-            $paragraph = [];
-            $numberOfWord = rand(50, 200);
-            $dataCopy = $data;
-            shuffle($dataCopy);
-            while (count($paragraph) < $numberOfWord) {
-                $paragraph = array_merge($paragraph, array_slice($dataCopy, 0, 30));
-                shuffle($dataCopy);
-            }
-            array_splice($paragraph, $numberOfWord);
-            $paragraphied = $ipsumGeneratorService->paragraphy($paragraph);
-            $paragraphs[] = str_replace(' .', '.', implode(' ', $paragraphied));
-        }
+        $paragraphs = $ipsumGeneratorService->generateParagraphs($numberOfParagraph);
         return new JsonResponse(['paragraphs' => $paragraphs]);
     }
 }
