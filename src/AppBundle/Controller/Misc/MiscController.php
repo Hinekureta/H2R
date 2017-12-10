@@ -1,5 +1,6 @@
 <?php
 namespace AppBundle\Controller\Misc;
+use AppBundle\Service\NbaIpsumGeneratorService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -46,9 +47,10 @@ class MiscController extends Controller
     /**
      * @Route("/nbaipsum-generate", name="generate-ipsum")
      * @param Request $request
+     * @param NbaIpsumGeneratorService $ipsumGeneratorService
      * @return JsonResponse
      */
-    public function generateIpsumAction(Request $request)
+    public function generateIpsumAction(Request $request, NbaIpsumGeneratorService $ipsumGeneratorService)
     {
         $rawFile = file_get_contents('nba.kev');
         $data = unserialize($rawFile);
@@ -68,26 +70,9 @@ class MiscController extends Controller
                 shuffle($dataCopy);
             }
             array_splice($paragraph, $numberOfWord);
-            $paragraphied = $this->paragraphy($paragraph);
+            $paragraphied = $ipsumGeneratorService->paragraphy($paragraph);
             $paragraphs[] = str_replace(' .', '.', implode(' ', $paragraphied));
         }
         return new JsonResponse(['paragraphs' => $paragraphs]);
-    }
-
-    private function paragraphy(array $paragraph)
-    {
-        $count = count($paragraph);
-        $numberOfWordsInPhrase = rand(5, 30);
-        $i = 0;
-        while ($i < $count) {
-            $paragraph[$i] = ucfirst($paragraph[$i]);
-            array_splice($paragraph, $i + $numberOfWordsInPhrase, 0, '.');
-            $i += $numberOfWordsInPhrase + 1;
-            $numberOfWordsInPhrase = rand(5, 30);
-        }
-        if (substr(end($paragraph), -1) != '.') {
-            $paragraph[] = '.';
-        }
-        return $paragraph;
     }
 }
